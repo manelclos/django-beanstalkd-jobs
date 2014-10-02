@@ -1,0 +1,3 @@
+- mail_admins in case of exception
+- save beanstalkd job stats
+- save execution stats (time, cpu...)
