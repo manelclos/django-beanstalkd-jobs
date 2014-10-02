@@ -79,7 +79,39 @@ Check the admin for job execution results
 And the detail view to see the captured stdout, stderr, exception if any was raised, etc.
 ![Django admin jobs list](./docs/django-beanstalkd-jobs-detail.png)
 
-Set meta information in the job for extended information
+Set meta information in the job for extended information, you can save anything that is JSON-serializable. Consider this modifications to the example:
+```python
+"""
+Example Beanstalk Job File.
+Needs to be called beanstalk_jobs.py and reside inside a registered Django app.
+"""
+import os
+import time
+
+from django_beanstalkd_jobs import beanstalk_job
+
+
+@beanstalk_job
+def background_counting(arg):
+    """
+    Do some incredibly useful counting to the value of arg
+    """
+    from django_beanstalkd_jobs.utils import get_current_job  # <--- import function
+    jobrun = get_current_job()                                # <--- use it
+    jobrun.meta['progress'] = '0'                             # <--- save some data in meta
+
+    value = int(arg)
+    pid = os.getpid()
+    print "[%s] Counting from 1 to %d." % (pid, value)
+    for i in range(1, value+1):
+        print '[%s] %d' % (pid, i)
+        time.sleep(1)
+
+    jobrun.meta['progress'] = '100'                           # <--- update data
+    jobrun.meta['foo'] = 'bar'                                # <--- more data
+```
+
+
 
 
 Acknowledgements
