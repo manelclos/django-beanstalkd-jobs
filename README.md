@@ -74,6 +74,7 @@ Notice how this app exits, while the workers still work on the tasks.
 ```
 
 Check the admin for job execution results
+![Django admin jobs list](./docs/django-beanstalkd-jobs-list.png)
 
 
 Set meta information in the job for extended information
