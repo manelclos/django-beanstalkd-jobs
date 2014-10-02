@@ -5,8 +5,8 @@ django-beanstalkd-jobs
 
 *django-beanstalkd-jobs* is a spin-off of [django-beanstalkd][django-beanstalkd], adding logged execution of jobs into the django configured database.
 
-Feautes
-=======
+Features
+========
 
 Create jobs as simple functions
 
