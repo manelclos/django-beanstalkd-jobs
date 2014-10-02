@@ -111,6 +111,10 @@ def background_counting(arg):
     jobrun.meta['foo'] = 'bar'                                # <--- more data
 ```
 
+When checking the detail information on the job, the meta_json field will contain
+```
+{"progress": "100", "foo": "bar"}
+```
 
 
 
