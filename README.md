@@ -34,9 +34,47 @@ def background_counting(arg):
         time.sleep(1)
 ```
 
-Execute them with workers, in the background
+Execute them with a worker, in the background
+```sh
+python manage.py beanstalk_worker
+```
 
-Check the result in the admin
+Or with multiple workers
+```sh
+python manage.py beanstalk_worker -w 4
+```
+
+For the `beanstalk_example` app, the command output will look like this
+
+```
+Available jobs:
+* beanstalk_example.background_counting
+```
+
+Everything is now ready and you can call the job function
+
+```python
+from django_beanstalkd_jobs import BeanstalkClient
+client = BeanstalkClient()
+client.call('beanstalk_example.background_counting', '5')
+```
+
+The call will return immediately, and the job function will be executed by the worker(s)
+
+If checking the `beanstalk_example` app, you can run the client with
+```
+python manage.py beanstalk_example_client
+```
+
+The output looks like this
+```
+Asynchronous Beanstalk Call
+-------------------------
+Notice how this app exits, while the workers still work on the tasks.
+```
+
+Check the admin for job execution results
+
 
 Set meta information in the job for extended information
 
