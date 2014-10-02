@@ -76,6 +76,8 @@ Notice how this app exits, while the workers still work on the tasks.
 Check the admin for job execution results
 ![Django admin jobs list](./docs/django-beanstalkd-jobs-list.png)
 
+And the detail view to see the captured stdout, stderr, exception if any was raised, etc.
+![Django admin jobs list](./docs/django-beanstalkd-jobs-detail.png)
 
 Set meta information in the job for extended information
 
